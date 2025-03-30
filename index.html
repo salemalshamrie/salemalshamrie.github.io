@@ -1,89 +1,500 @@
-1	<!DOCTYPE html> 
-2	<html lang="ar" dir="rtl"> 
-3	<head> 
-4	    <meta charset="UTF-8"> 
-5	    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-6	  <title>محفظتي الشخصية</title> 
-7	    <style> 
-8	        body { 
-9	            font-family: Arial, sans-serif; 
-10	            margin: 5; 
-11	            padding: 9; 
-12	            background-color: #f4f4f4; 
-13	            color: #333; 
-14	        } 
-15	     header { 
-16	            background-color: #333; 
-17	            color: white; 
-18	            text-align: center; 
-19	            padding: 1em 0; 
-20	        } 
-21	        section { 
-22	            width: 80%; 
-23	            margin: 20px auto; 
-24	            background-color: white; 
-25	            padding: 20px; 
-26	            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-27	        } 
-28	            .profile-img { https://cdn.pixabay.com/photo/2016/04/04/14/12/monitor-1307227_640.jpg
-29	            width: 150px; 
-30	            height: 150px; 
-31	            border-radius: 50%; 
-32	            object-fit: cover; 
-33	            display: block; 
-34	            margin: 0 auto 20px; 
-35	        } 
-36	        .project { 
-37	            border-bottom: 1px solid #eee; 
-38	            padding-bottom: 10px; 
-39	            margin-bottom: 10px; 
-40	        } 
-41	        footer { 
-42	            text-align: center; 
-43	            padding: 1em 0; 
-44	            background-color: #333; 
-45	            color: white; 
-46	        } 
-47	    </style> 
-48	</head> 
-49	<body> 
-50	    <header> 
-51	        <h1>محفظتي الشخصية</h1> 
-52	    </header> 
-53	 
-54	    <section id="profile"> 
-55	        <img src="your-profile-image.jpg" alt="صورة الملف الشخصي" class="profile-img"> 
-56	        <h2>سالم</h2> 
-57	        <p>الحمد لله .</p> 
-58	    </section> 
-59	 
-60	    <section id="projects"> 
-61	        <h2>مشاريعي</h2> 
-62	        <div class="project"> 
-63	            <h3>programing</h3> 
-64	            <  1.</p> 
-65	            <a href="#"></a> 
-66	        </div> 
-67	        <div class="project"> 
-68	            <h3>MR.X</h3> 
-69	            <p>تقديم مشاريع برمجية 2.</p> 
-70	            <a href="#">رابط المشروع</a> 
-71	        </div> 
-72	    </section> 
-73	 
-74	    <section id="contact"> 
-75	        <h2>تواصل معي</h2> 
-76	        <p>يمكنك التواصل معي عبر:</p> 
-77	        <ul> 
-78	            <li>alshmremrten@gmail.com: your-email@example.com</li> 
-79	            <li>لينكدإن: <a href="#"></a></li> 
-80	            <li>github: <a href="#"> salemalshamrie.github.io</a></li> 
-81	        </ul> 
-82	    </section> 
-83	 
-84	    <footer> 
-85	        <p>&copy; 2024 صفحتي الرسمية  الحقوق محفوظة.</p> 
-86	    </footer> 
-87	</body> 
-88	</html> 
-89	 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        :root {
+            --white: white;
+            --black: black;
+            --transparent-black: rgba(0, 0, 0, 0.9);
+            --black-border: #242323;
+            --gradient-blue: linear-gradient(135deg, #07064c, #4c0848);
+            --gradient-blue-default: #07064c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            color: var(--white);
+            background-color: var(--black);
+            overflow: hidden;
+        }
+
+        .container {
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        nav>div {
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        nav .desktop,
+        nav .mobile {
+            display: none;
+        }
+
+        nav .desktop div {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        nav div a {
+            position: relative;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--white);
+            transition: all .3s;
+        }
+
+        nav div a:hover {
+            background-color: var(--black);
+        }
+
+        nav div a::after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            width: 0;
+            transition: all .3s;
+            background-color: var(--gradient-blue-default);
+            background-image: var(--gradient-blue);
+        }
+
+        nav div a.brand {
+            font-weight: bold;
+        }
+
+        nav div a:hover::after {
+            width: 100%;
+        }
+
+        nav a.menu-btn {
+            font-size: 24px;
+        }
+
+        #sidenav {
+            display: none;
+            background-color: var(--transparent-black);
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            padding-top: 120px;
+            padding-bottom: 40px;
+            z-index: 1;
+            transition: all 1s;
+        }
+
+        #sidenav a {
+            display: block;
+            text-decoration: none;
+            padding: 20px 40px;
+            color: var(--white);
+            transition: all .3s;
+        }
+
+        #sidenav .close-btn {
+            display: inline-block;
+            position: absolute;
+            right: 5px;
+            top: 65px;
+            height: 50px;
+            line-height: 50px;
+            width: 50px;
+            text-align: center;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        #sidenav a:hover {
+            background-color: var(--gradient-blue-default);
+            background-image: var(--gradient-blue);
+        }
+
+        main {
+            height: 100%;
+        }
+
+        .parallax-effect {
+            height: 100%;
+            position: relative;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .parallax-effect h1 {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            color: var(--white);
+            text-align: center;
+            font-size: 50px;
+            padding: 0 20px;
+            text-shadow: 2px 2px 5px var(--black);
+        }
+
+        .parallax-effect h1 small {
+            display: block;
+            font-size: 26px;
+            line-height: 34px;
+            margin-top: 20px;
+            font-weight: normal;
+        }
+
+        .bg-img-1 {
+            background-image: url('/tutorials/css/templates/parallax-bg-1.jpg');
+        }
+
+        .bg-img-2 {
+            background-image: url('/tutorials/css/templates/parallax-bg-2.jpg');
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .categories {
+            padding: 0 20px;
+        }
+
+        .categories .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .categories .grid .card {
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            position: relative;
+            padding: 50px 20px;
+            background-color: var(--gradient-blue-default);
+            background-image: var(--gradient-blue);
+            transition: all .3s;
+        }
+
+        .categories .grid .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .categories .grid .card i {
+            display: block;
+            text-align: center;
+            font-size: 50px;
+            margin-bottom: 30px;
+        }
+
+        .categories .grid .card span {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: block;
+            text-align: center;
+            font-size: 16px;
+            padding: 10px;
+        }
+
+        .categories .grid .card p {
+            text-align: center;
+            font-size: 20px;
+            line-height: 32px;
+        }
+
+        .categories .center {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .categories .btn-view-all {
+            display: inline-block;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: var(--white);
+            overflow: hidden;
+            background-color: var(--gradient-blue-default);
+            background-image: var(--gradient-blue);
+            padding: 2px;
+        }
+
+        .categories .btn-view-all span {
+            display: block;
+            padding: 15px 25px;
+            background-color: var(--black);
+            border-radius: 25px;
+            transition: all .6s;
+        }
+
+        .categories .btn-view-all:hover span {
+            background-color: var(--gradient-blue-default);
+            background-image: var(--gradient-blue);
+        }
+
+        .reviews h2 {
+            padding: 0 20px;
+        }
+
+        .reviews .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 30px;
+            padding: 60px 30px;
+        }
+
+        .reviews .grid .comment {
+            padding: 20px;
+            box-shadow: 2px 2px 5px var(--black-border);
+            border-radius: 10px;
+        }
+
+        .reviews .grid .comment blockquote {
+            line-height: 28px;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .reviews .grid .comment .author {
+            text-align: right;
+        }
+
+        .reviews .grid .comment blockquote::before {
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: 28px;
+            margin-right: 7px;
+            content: "\f10d";
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 20px 15px 50px 15px;
+            line-height: 30px;
+            font-size: 15px;
+        }
+
+        @media(max-width: 920px) {
+            .categories .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .reviews .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media(max-width: 640px) {
+            nav .mobile {
+                display: flex;
+            }
+
+            .categories .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(min-width: 641px) {
+            nav .desktop {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <nav>
+            <div class="desktop">
+                <div>
+                    <a class="brand" href="#">WebsiteName</a>
+                </div>
+                <div>
+                    <a href="#">Tutorials</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Tests</a>
+                    <a href="#">Sign In</a>
+                </div>
+            </div>
+            <div class="mobile">
+                <a class="brand" href="#">WebsiteName</a>
+                <a class="menu-btn" href="javascript:void(0)" onclick="toggleMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                </a>
+            </div>
+        </nav>
+        <main>
+            <section class="parallax-effect bg-img-1">
+                <h1>
+                    World Best Tutorials
+                    <small>Over 2.55 million student</small>
+                </h1>
+            </section>
+            <section class="categories">
+                <h2>Categories</h2>
+                <div class="grid">
+                    <a class="card">
+                        <i class="fa-solid fa-gamepad"></i>
+                        <span>20+</span>
+                        <p>Game Development</p>
+                    </a>
+                    <a class="card" href="#">
+                        <i class="fa-solid fa-display"></i>
+                        <span>50+</span>
+                        <p>Frontend Development</p>
+                    </a>
+                    <a class="card" href="#">
+                        <i class="fa-solid fa-server"></i>
+                        <span>20+</span>
+                        <p>Backend Development</p>
+                    </a>
+                    <a class="card" href="#">
+                        <i class="fa-solid fa-laptop-code"></i>
+                        <span>80+</span>
+                        <p>Fullstack Development</p>
+                    </a>
+                    <a class="card" href="#">
+                        <i class="fa-solid fa-paintbrush"></i>
+                        <span>20+</span>
+                        <p>Drawing</p>
+                    </a>
+                    <a class="card" href="#">
+                        <i class="fa-solid fa-dumbbell"></i>
+                        <span>60+</span>
+                        <p>Workout</p>
+                    </a>
+                </div>
+                <div class="center">
+                    <a href="javascript:void(0)" class="btn-view-all">
+                        <span>View All Categories</span>
+                    </a>
+                </div>
+            </section>
+            <section class="reviews">
+                <h2>Reviews</h2>
+                <div class="grid parallax-effect bg-img-2">
+                    <div class="comment">
+                        <blockquote>
+                            I am proud to say that after a few months of taking this course I passed my exam and am now
+                            an
+                            AWS Certified Cloud Practitioner!
+                        </blockquote>
+                        <p class="author">Jhon Doe</p>
+                    </div>
+                    <div class="comment">
+                        <blockquote>
+                            This course helped me freshen up on my product manager skills and land a job at Facebook!
+                            Thanks
+                            guys :)
+                        </blockquote>
+                        <p class="author">Xavier</p>
+                    </div>
+                    <div class="comment">
+                        <blockquote>
+                            One of the best courses on management and leadership I have come across so far. The advice
+                            is
+                            practical, and examples highly relatable. Would help anyone become a better manager.
+                        </blockquote>
+                        <p class="author">Mhamad Harmush</p>
+                    </div>
+                    <div class="comment">
+                        <blockquote>
+                            I highly recommend this course for all budding data scientists. Even people with no prior
+                            knowledge of any visualization tools can become a master after completing this course.
+                        </blockquote>
+                        <p class="author">Hanna Willson</p>
+                    </div>
+                    <div class="comment">
+                        <blockquote>
+                            I become a game develper after this amazing tutorial. The instructor have a great experience
+                            in
+                            the unity engine. I'm going to create my own game now :)
+                        </blockquote>
+                        <p class="author">Sarah Yazan</p>
+                    </div>
+                    <div class="comment">
+                        <blockquote>
+                            I highly recommend this course. All necessary information are mentioned clearly. Don't waste
+                            your time with other tutorials.
+                        </blockquote>
+                        <p class="author">Jasmin bella</p>
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <div class="copyright">
+                    Copyright © 2014 - 2023 WebsiteName. All Rights Reserved.
+                </div>
+            </footer>
+        </main>
+        <div id="sidenav">
+            <span class="close-btn" onclick="toggleMenu()">
+                <i class="fa-solid fa-xmark"></i>
+            </span>
+            <a href="#">Tutorials</a>
+            <a href="#">Blog</a>
+            <a href="#">Tests</a>
+            <a href="#">Sign In</a>
+        </div>
+    </div>
+    <script>
+        function toggleMenu() {
+            var sidenav = document.getElementById('sidenav');
+            sidenav.style.display = (sidenav.style.display == 'none' || sidenav.style.display == '') ? 'block' : 'none';
+        }
+    </script>
+</body>
+
+</html>
