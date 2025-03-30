@@ -1,0 +1,123 @@
+/* إعادة تعيين الأنماط الافتراضية */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* نمط العنوان الرئيسي */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+/* نمط قسم الرصيد */
+.balance {
+  background-color: #e6f7ff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.balance h2 {
+  margin-bottom: 10px;
+}
+
+.balance p {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* نمط قسم المعاملات */
+.transactions {
+  margin-bottom: 20px;
+}
+
+.transactions h2 {
+  margin-bottom: 15px;
+}
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.transaction:last-child {
+  border-bottom: none;
+}
+
+.transaction .amount {
+  font-weight: bold;
+}
+
+.transaction .amount.positive {
+  color: green;
+}
+
+.transaction .amount.negative {
+  color: red;
+}
+
+/* نمط قسم الأزرار */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.buttons button:hover {
+  background-color: #0056b3;
+}
+
+/* استجابة الشاشة */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .transaction {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .buttons button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
