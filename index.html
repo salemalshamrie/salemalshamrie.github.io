@@ -1,21 +1,21 @@
 <?php
-$servername = "localhost";
-$username = "your_username";
-$password = "your_password";
-$dbname = "visitor_stats";
+servername = "localhost";
+username = "your_username";
+password = "your_password";
+dbname = "visitor_stats";
 
 // إنشاء اتصال
-$conn = new mysqli($servername, $username, $password, $dbname);
+conn = new mysqli($servername, $username, $password, $dbname);
 
 // التحقق من الاتصال
-if ($conn->connect_error) {
+if (conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 // الحصول على معلومات الزائر
-$ip_address = $_SERVER['REMOTE_ADDR'];
-$user_agent = $_SERVER['HTTP_USER_AGENT'];
-$visit_time = date('Y-m-d H:i:s');
+ip_address = _SERVER['REMOTE_ADDR'];
+user_agent = _SERVER['HTTP_USER_AGENT'];
+visit_time = date('Y-m-d H:i:s');
 
 // إدراج معلومات الزائر في قاعدة البيانات
 $sql = "INSERT INTO visitors (ip_address, user_agent, visit_time) VALUES (?, ?, ?)";
@@ -30,16 +30,16 @@ if ($stmt->execute()) {
     $visitor_count = $row['count'];
 
     // عرض معلومات الزوار
-    $visitor_info = "<p>عدد الزوار: " . $visitor_count . "</p>";
-    $visitor_info .= "<p>عنوان IP: " . $ip_address . "</p>";
-    $visitor_info .= "<p>المتصفح: " . $user_agent . "</p>";
-    $visitor_info .= "<p>وقت الزيارة: " . $visit_time . "</p>";
+    visitor_info = "<p>عدد الزوار: " . $visitor_count . "</p>";
+    visitor_info .= "<p>عنوان IP: " . $ip_address . "</p>";
+    visitor_info .= "<p>المتصفح: " . $user_agent . "</p>";
+    visitor_info .= "<p>وقت الزيارة: " . $visit_time . "</p>";
 } else {
     $visitor_info = "Error: " . $stmt->error;
 }
 
-$stmt->close();
-$conn->close();
+stmt->close();
+conn->close();
 ?>
 
 <!DOCTYPE HTML>
