@@ -15,11 +15,11 @@
     <title>Background Waves</title>
     <style>
         :root {
-            --back_color: #000000; /* اسود */
-            --front_color: #28003f; /*بنفسجي غامق*/
-            --purple: #800080; /* بنفسجي */
-            --pink: #0062be; /* لون بيبسي */
-            --blue: #8A2BE2; /*بنفسجي متوسط */
+            --back_color: #000000;
+            --front_color: #28003f;
+            --purple: #800080;
+            --pink: #0062be;
+            --blue: #8A2BE2;
         }
 
         * {
@@ -62,23 +62,21 @@
             overflow: hidden;
         }
 
-        .wave-01 {
+        .wave-01, .wave-02, .wave-03 {
             position: absolute;
             width: 600px;
             height: 600px;
             background: linear-gradient(to top right, var(--purple), var(--pink));
             border-radius: 50%;
+        }
+
+        .wave-01 {
             top: -200%;
             left: -20%;
             animation: rotate 10s linear infinite;
         }
 
         .wave-02 {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(to top right, var(--purple), var(--pink));
-            border-radius: 40%;
             top: -205%;
             left: -22%;
             opacity: 0.5;
@@ -86,11 +84,6 @@
         }
 
         .wave-03 {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(to top right, var(--purple), var(--pink));
-            border-radius: 45%;
             top: -198%;
             left: -18%;
             opacity: 0.2;
@@ -112,7 +105,13 @@
             transform: translate(-50%, -50%);
             top: 80%;
             text-align: center;
-            cursor: move; /* تغيير المؤشر إلى حركة */
+            cursor: move;
+            transition: all 0.5s ease-in-out; /* إضافة انتقال سلس */
+        }
+
+        .profile_pic_content.falling {
+            top: 100vh; /* تحريك الصورة إلى أسفل الشاشة */
+            opacity: 0; /* جعل الصورة شفافة */
         }
 
         .profile_pic_content::after {
@@ -126,7 +125,7 @@
             left: 2px;
             z-index: -1;
             opacity: 0;
-            transition: all .7s;
+            transition: all 0.7s;
         }
 
         .profile_pic_content:hover::after {
@@ -189,7 +188,7 @@
             border-radius: 20px;
             color: white;
             font-weight: bolder;
-            transition: all .7s;
+            transition: all 0.7s;
         }
 
         .satanic:hover {
@@ -237,7 +236,6 @@
 
         setInterval(createStar, 100);
 
-        // جعل صورة البروفايل قابلة للتحرك
         const profilePicContent = document.querySelector('.profile_pic_content');
         let isDragging = false;
         let offsetX, offsetY;
@@ -257,6 +255,11 @@
         document.addEventListener('mouseup', () => {
             isDragging = false;
         });
+
+        // إضافة تأثير السقوط عند اللمس
+        profilePicContent.addEventListener('touchstart', () => {
+            profilePicContent.classList.add('falling');
+        });
     </script>
 </head>
 <body>
@@ -270,7 +273,7 @@
         <div class="profile_pic_content">
             <video class="profile_pic" autoplay loop muted>
                 <source src="https://files.catbox.moe/ap80mh.mp4" type="video/mp4">
-                Your browser does does not support the video tag.
+                Your browser does not support the video tag.
             </video>
         </div>
     </div>
