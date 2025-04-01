@@ -37,7 +37,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
         }
 
         .vcard {
@@ -46,8 +45,6 @@
             background: var(--front_color);
             border-radius: 8px;
             box-shadow: 5px 0px 20px rgba(0, 0, 0, 39%);
-            position: relative;
-            z-index: 2;
         }
 
         .header {
@@ -62,21 +59,23 @@
             overflow: hidden;
         }
 
-        .wave-01, .wave-02, .wave-03 {
+        .wave-01 {
             position: absolute;
             width: 600px;
             height: 600px;
             background: linear-gradient(to top right, var(--purple), var(--pink));
             border-radius: 50%;
-        }
-
-        .wave-01 {
             top: -200%;
             left: -20%;
             animation: rotate 10s linear infinite;
         }
 
         .wave-02 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(to top right, var(--purple), var(--pink));
+            border-radius: 40%;
             top: -205%;
             left: -22%;
             opacity: 0.5;
@@ -84,6 +83,11 @@
         }
 
         .wave-03 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(to top right, var(--purple), var(--pink));
+            border-radius: 45%;
             top: -198%;
             left: -18%;
             opacity: 0.2;
@@ -105,13 +109,6 @@
             transform: translate(-50%, -50%);
             top: 80%;
             text-align: center;
-            cursor: move;
-            transition: all 0.5s ease-in-out; /* إضافة انتقال سلس */
-        }
-
-        .profile_pic_content.falling {
-            top: 100vh; /* تحريك الصورة إلى أسفل الشاشة */
-            opacity: 0; /* جعل الصورة شفافة */
         }
 
         .profile_pic_content::after {
@@ -219,47 +216,6 @@
             typeSpeed: 7
         }
         var typed = new Typed(".typed_text", options);
-
-        function createStar() {
-            const star = document.createElement('div');
-            star.classList.add('star');
-            star.style.left = `${Math.random() * 100}vw`;
-            star.style.animationDuration = `${Math.random() * 3 + 2}s`;
-            star.style.opacity = Math.random();
-            star.style.width = `${Math.random() * 3 + 3}px`;
-            star.style.height = star.style.width;
-            document.body.appendChild(star);
-            setTimeout(() => {
-                star.remove();
-            }, 5000);
-        }
-
-        setInterval(createStar, 100);
-
-        const profilePicContent = document.querySelector('.profile_pic_content');
-        let isDragging = false;
-        let offsetX, offsetY;
-
-        profilePicContent.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - profilePicContent.offsetLeft;
-            offsetY = e.clientY - profilePicContent.offsetTop;
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            profilePicContent.style.left = `${e.clientX - offsetX}px`;
-            profilePicContent.style.top = `${e.clientY - offsetY}px`;
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-
-        // إضافة تأثير السقوط عند اللمس
-        profilePicContent.addEventListener('touchstart', () => {
-            profilePicContent.classList.add('falling');
-        });
     </script>
 </head>
 <body>
