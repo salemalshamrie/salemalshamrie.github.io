@@ -1,10 +1,11 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'/>
 <!DOCTYPE HTML>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta name="theme-color" content="#6C63FF"/> <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+    <meta name="theme-color" content="#6C63FF"/>
+    <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta content="@kokksha" name="description"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js"></script>
@@ -30,43 +31,213 @@
             <h4>SALEM</h4>
         </div>
         <div class="snuff">
-            <h5 class="typed_text"><i>مرحباً بالعالم</i></h5>
+            <h5 class="typed_text"><i>Hello World</i></h5>
         </div>
         <div class="social">
             <a href="https://t.me/kokksha"><i class="fab fa-telegram"></i></a>
             <a href="https://www.instagram.com/_u_vf?igsh=bXRqd2Z4ZWhteW94"><i class="fab fa-instagram"></i></a>
             <a href="https://www.facebook.com/share/15KQ2NmX9V/"><i class="fab fa-facebook"></i></a>
             <a href="tg://settings"><i class="fas fa-user"></i></a>
+            <a href="https://github.com/salemalshamrie"><i class="fab fa-github"></i></a>
         </div>
-        <a class="satanic" href="https://t.me/kokksha"><i class="fab fa-telegram"></i>انضم للقناة</a>
+        <a class="satanic" href="https://t.me/kokksha"><i class="fab fa-telegram"></i>Join Channel</a>
+        <p style="font-size: 0.75em; margin-top: 15px; padding: 0 5px;">
+            This page was programmed by Salem Al-Shammari. All rights reserved 2023-2025.
+        </p>
     </div>
 </div>
 <style>
     :root {
-        --back_color: #121212; /* لون خلفية داكن أكثر عمقًا */
-        --front_color: #1E1E1E; /* لون بطاقة داكن أكثر نعومة */
-        --purple: #6C63FF; /* لون رئيسي بنفسجي حيوي */
-        --pink: #FF6B6B; /* لون ثانوي وردي مرجاني حيوي */
-        --blue: #888888; /* لون ثانوي رمادي فاتح */
+        --back_color: #121212; /* Darker background color */
+        --front_color: #1E1E1E; /* Softer dark card color */
+        --purple: #6C63FF; /* Vibrant purple main color */
+        --pink: #FF6B6B; /* Vibrant coral pink secondary color */
+        --blue: #888888; /* Light gray secondary color */
     }
 
-    *{ font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box;}
-    body{ background: var(--back_color); width: 100vw; height: 100vh; overflow: hidden; display: flex; justify-content: center; align-items: center;}
-    .vcard{ width: 450px; height: 550px; background: var(--front_color); border-radius: 8px; box-shadow: 5px 0px 20px rgba(0,0,0,39%);}
-    .header{ height: 40%; position: relative;}
-    .wave_bg{ border-radius: 8px; position: relative; height: 100%; overflow: hidden;}
-    .wave-01{ position: absolute; width: 600px; height: 600px; background: linear-gradient(to top right, var(--purple), var(--pink)); border-radius: 50%; top: -200%; left: -20%; animation: rotate 10s linear infinite;}.wave-02{ position: absolute; width: 600px; height: 600px; background: linear-gradient(to top right, var(--purple), var(--pink)); border-radius: 40%; top: -205%; left: -22%; opacity: 0.5; animation: rotate 15s linear infinite;}.wave-03{ position: absolute; width: 600px; height: 600px; background: linear-gradient(to top right, var(--purple), var(--pink)); border-radius: 45%; top: -198%; left: -18%; opacity: 0.2; animation: rotate 15s linear infinite;}
-    @keyframes rotate{ 100%{ transform: rotate(360deg); }}
-    .profile_pic_content{ width: 150px; height: 150px; border-radius: 50%; position: absolute; left: 50%; transform: translate(-50%, -50%); top: 80%; text-align: center;}.profile_pic_content::after{ content: ''; border-radius: 50%; width: 100%; height: 100%; background: linear-gradient(to right, var(--purple), var(--pink)); position: absolute; top: 1px; left: 2px; z-index: -1; opacity: 0; transition: all .7s;}.profile_pic_content:hover::after{ opacity: 0.2;}
-    .profile_pic{ max-width: 100%; max-height: 100%; border-radius: 100%;}
-    .card_content{ position: relative; top: 7%; text-align: center;}
-    .satan{ color: var(--pink); font-weight: 700; font-size: 1.4em;}.snuff{ margin-top: 5px; color: var(--pink); padding: 0px 10px;}
-    .typed_text{ text-align: center;}
-    .social{ color: var(--pink); padding: 5px; margin-top: 65px;}.social a{ text-decoration: none; color: var(--pink);}.social i{ padding: 5px;}.satanic{ cursor: pointer; display: block; text-decoration: none; width: 50%; margin-top: 10px; margin-left: 25%; background: linear-gradient(to top right, var(--pink), var(--purple)); padding: 10px 20px; border-radius: 20px; color: white; font-weight: bolder; transition: all .7s;}.satanic:hover{ box-shadow: 0px 8px 20px rgba(0,0,0,39%);}
+    * {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: var(--back_color);
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .vcard {
+        width: 450px;
+        height: 550px;
+        background: var(--front_color);
+        border-radius: 8px;
+        box-shadow: 5px 0px 20px rgba(0, 0, 0, 39%);
+    }
+
+    .header {
+        height: 40%;
+        position: relative;
+    }
+
+    .wave_bg {
+        border-radius: 8px;
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .wave-01 {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: linear-gradient(to top right, var(--purple), var(--pink));
+        border-radius: 50%;
+        top: -200%;
+        left: -20%;
+        animation: rotate 10s linear infinite;
+    }
+
+    .wave-02 {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: linear-gradient(to top right, var(--purple), var(--pink));
+        border-radius: 40%;
+        top: -205%;
+        left: -22%;
+        opacity: 0.5;
+        animation: rotate 15s linear infinite;
+    }
+
+    .wave-03 {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: linear-gradient(to top right, var(--purple), var(--pink));
+        border-radius: 45%;
+        top: -198%;
+        left: -18%;
+        opacity: 0.2;
+        animation: rotate 15s linear infinite;
+    }
+
+    @keyframes rotate {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .profile_pic_content {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 80%;
+        text-align: center;
+    }
+
+    .profile_pic_content::after {
+        content: '';
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, var(--purple), var(--pink));
+        position: absolute;
+        top: 1px;
+        left: 2px;
+        z-index: -1;
+        opacity: 0;
+        transition: all .7s;
+    }
+
+    .profile_pic_content:hover::after {
+        opacity: 0.2;
+    }
+
+    .profile_pic {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 100%;
+    }
+
+    .card_content {
+        position: relative;
+        top: 7%;
+        text-align: center;
+    }
+
+    .satan {
+        font-weight: 700;
+        font-size: 1.4em;
+        background: linear-gradient(to right, var(--pink), var(--purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .snuff {
+        margin-top: 5px;
+        padding: 0px 10px;
+        background: linear-gradient(to right, var(--pink), var(--purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .typed_text {
+        text-align: center;
+    }
+
+    .social {
+        padding: 5px;
+        margin-top: 65px;
+    }
+
+    .social a {
+        text-decoration: none;
+    }
+
+    .social i {
+        padding: 5px;
+        background: linear-gradient(to right, var(--pink), var(--purple)); /* تطبيق التدرج على الأيقونات */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .satanic {
+        cursor: pointer;
+        display: block;
+        text-decoration: none;
+        width: 50%;
+        margin-top: 10px;
+        margin-left: 25%;
+        background: linear-gradient(to top right, var(--pink), var(--purple));
+        padding: 10px 20px;
+        border-radius: 20px;
+        color: white;
+        font-weight: bolder;
+        transition: all .7s;
+    }
+
+    .satanic:hover {
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 39%);
+    }
+
+    .card_content p {
+        background: linear-gradient(to right, var(--pink), var(--purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 </style>
 <script>
     var options = {
-        strings: ["<i>الجملة الأولى</i>.", "ثق بنفسك ولا شيء مستحيل<br>قناة تيليجرام: @kokksha<br>انستجرام: @_u_vf"],
+        strings: ["<i>First Sentence</i>.", "Believe in yourself, nothing is impossible.<br>Telegram Channel: @kokksha<br>Instagram: @_u_vf"],
         typeSpeed: 7
     }
     var typed = new Typed(".typed_text", options);
