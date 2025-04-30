@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -166,11 +166,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 10px; /* Add spacing between icons */
         }
 
         .social a {
             text-decoration: none;
-            margin: 0 5px; /* Add spacing between icons */
+            /* margin: 0 5px; Remove if using gap */
         }
 
         .social i {
@@ -216,11 +217,14 @@
             width: 2px;
             background-color: #fff;
             margin-left: 5px;
-            animation: blink 0.5s infinite;
+            animation: continuous-blink 1s infinite alternate; /* تم التعديل هنا */
         }
 
-        @keyframes blink {
-            50% {
+        @keyframes continuous-blink { /* تم التعديل هنا */
+            0% {
+                opacity: 1;
+            }
+            100% {
                 opacity: 0;
             }
         }
@@ -255,7 +259,7 @@
             </div>
             <div>
                 <a href="tg://settings"><i class="fas fa-user" style="color: #888888;"></i></a>
-                <a href="https://csince.github.io/"><i class="fas fa-users" style="color: #888888;"></i></a>
+                <a href="https://t.me/no18tibot"><i class="fab fa-telegram" style="color: #2AABEE;"></i></a> <a href="https://csince.github.io/"><i class="fas fa-users" style="color: #888888;"></i></a>
                 <a href="https://g.co/kgs/pXVXQxK"><i class="fas fa-futbol" style="color: #DB4437;"></i></a>
                 <a href="https://uokerbala.edu.iq/"><i class="fas fa-university" style="color: #1976d2;"></i></a>
             </div>
@@ -268,9 +272,7 @@
 </div>
 <script>
     var options = {
-        strings: ["<i>First Sentence</i>.",BELIEVE IN YOURSELF, NOTHING IS IMPOSSIBLE
- "
-.<br>Telegram Channel: @kokksha<br>Instagram: @_u_vf"],
+        strings: ["<i>First Sentence</i>.", "BELIEVE IN YOURSELF, NOTHING IS IMPOSSIBLE.<br>Telegram Channel: @kokksha<br>Instagram: @_u_vf"],
         typeSpeed: 7
     };
     var typed = new Typed(".typed_text", options);
