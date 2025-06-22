@@ -191,8 +191,12 @@
         }
 
         @keyframes continuous-blink {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -221,8 +225,10 @@
     <div class="social">
         <div>
             <a href="https://t.me/kokksha"><i class="fab fa-telegram" style="color: #2AABEE;"></i></a>
-            <a href="https://www.facebook.com/share/15KQ2NmX9V/"><i class="fab fa-facebook" style="color: #1877F2;"></i></a>
-            <a href="https://www.instagram.com/_u_vf?igsh=bXRqd2Z4ZWhteW94"><i class="fab fa-instagram" style="color: #E1306C;"></i></a>
+            <a href="https://www.facebook.com/share/15KQ2NmX9V/"><i class="fab fa-facebook"
+                                                                     style="color: #1877F2;"></i></a>
+            <a href="https://www.instagram.com/_u_vf?igsh=bXRqd2Z4ZWhteW94"><i class="fab fa-instagram"
+                                                                              style="color: #E1306C;"></i></a>
             <a href="https://github.com/salemalshamrie"><i class="fab fa-github" style="color: #171515;"></i></a>
             <a href="tg://settings"><i class="fas fa-user" style="color: #888888;"></i></a>
             <a href="https://g.co/kgs/pXVXQxK"><i class="fas fa-futbol" style="color: #DB4437;"></i></a>
@@ -230,7 +236,10 @@
         </div>
     </div>
 </div>
-<p class="footer-text"> This page was programmed by Salem Al-Shammari. All rights reserved © 2025. </p>
+
+<p class="footer-text">
+    This page was programmed by Salem Al-Shammari. All rights reserved © 2025.
+</p>
 
 <script type="importmap">
     {
@@ -242,15 +251,14 @@
         }
     }
 </script>
-
 <script type="module">
     import * as THREE from 'three';
-    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+    import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
+    import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
+    import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
     import anime from 'animejs';
-    import { createNoise3D, createNoise4D } from 'simplex-noise';
+    import {createNoise3D, createNoise4D} from 'simplex-noise';
 
     let scene, camera, renderer, controls, clock;
     let composer, bloomPass;
@@ -279,9 +287,9 @@
         morphDuration: 4000,
         particleSizeRange: [0.05, 0.15],
         starCount: 18000,
-        bloomStrength: 1.0,
-        bloomRadius: 0.5,
-        bloomThreshold: 0.15,
+        bloomStrength: 1.5, // Increased for more clarity
+        bloomRadius: 0.8,   // Adjusted for clarity
+        bloomThreshold: 0.05, // Decreased for more clarity
         idleFlowStrength: 0.25,
         idleFlowSpeed: 0.08,
         idleRotationSpeed: 0.02,
@@ -289,17 +297,17 @@
         morphBrightnessFactor: 0.6
     };
 
-    const morphState = { progress: 0.0 };
-    const scaleState = { currentShapeSize: CONFIG.shapeSize };
+    const morphState = {progress: 0.0};
+    const scaleState = {currentShapeSize: CONFIG.shapeSize};
 
     const COLOR_SCHEMES = {
-        fire: { startHue: 0, endHue: 45, saturation: 0.95, lightness: 0.6 },
-        neon: { startHue: 300, endHue: 180, saturation: 1.0, lightness: 0.65 },
-        nature: { startHue: 90, endHue: 160, saturation: 0.85, lightness: 0.55 },
-        rainbow: { startHue: 0, endHue: 360, saturation: 0.9, lightness: 0.6 },
-        ocean: { startHue: 180, endHue: 240, saturation: 0.9, lightness: 0.6 },
-        forest: { startHue: 60, endHue: 120, saturation: 0.8, lightness: 0.5 },
-        gold: { startHue: 40, endHue: 60, saturation: 0.9, lightness: 0.7 }
+        fire: {startHue: 0, endHue: 45, saturation: 0.95, lightness: 0.6},
+        neon: {startHue: 300, endHue: 180, saturation: 1.0, lightness: 0.65},
+        nature: {startHue: 90, endHue: 160, saturation: 0.85, lightness: 0.55},
+        rainbow: {startHue: 0, endHue: 360, saturation: 0.9, lightness: 0.6},
+        ocean: {startHue: 180, endHue: 240, saturation: 0.9, lightness: 0.6},
+        forest: {startHue: 60, endHue: 120, saturation: 0.8, lightness: 0.5},
+        gold: {startHue: 40, endHue: 60, saturation: 0.9, lightness: 0.7}
     };
     const colorSchemeNames = Object.keys(COLOR_SCHEMES);
 
@@ -326,7 +334,7 @@
 
             img.onload = () => {
                 const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d', { willReadFrequently: true });
+                const context = canvas.getContext('2d', {willReadFrequently: true});
 
                 const canvasWidth = 200;
                 const aspectRatio = img.width / img.height;
@@ -349,7 +357,7 @@
 
                         const brightness = (r + g + b) / 3;
                         if (a > 200 && brightness > 60) {
-                            potentialPoints.push({ x: x, y: y, brightness: brightness });
+                            potentialPoints.push({x: x, y: y, brightness: brightness});
                         }
                     }
                 }
@@ -372,6 +380,7 @@
                     cumulativeBrightness += potentialPoints[i].brightness;
                     brightnessBuckets.push(cumulativeBrightness);
                 }
+
 
                 for (let i = 0; i < count; i++) {
                     const randValue = Math.random() * totalBrightness;
@@ -413,7 +422,7 @@
         camera.lookAt(scene.position);
 
         const canvas = document.getElementById('webglCanvas');
-        renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+        renderer = new THREE.WebGLRenderer({canvas, antialias: true, alpha: true, powerPreference: 'high-performance'});
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -453,7 +462,10 @@
     function setupPostProcessing() {
         composer = new EffectComposer(renderer);
         composer.addPass(new RenderPass(scene, camera));
-        bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), CONFIG.bloomStrength, CONFIG.bloomRadius, CONFIG.bloomThreshold);
+        bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight),
+            CONFIG.bloomStrength,
+            CONFIG.bloomRadius,
+            CONFIG.bloomThreshold);
         composer.addPass(bloomPass);
     }
 
@@ -486,20 +498,33 @@
         starGeometry.setAttribute('size', new THREE.Float32BufferAttribute(starSizes, 1));
 
         const starMaterial = new THREE.ShaderMaterial({
-            uniforms: { pointTexture: { value: createStarTexture() } },
+            uniforms: {
+                pointTexture: {value: createStarTexture()}
+            },
             vertexShader: `
-                attribute float size; varying vec3 vColor; varying float vSize;
+                attribute float size;
+                varying vec3 vColor;
+                varying float vSize;
                 void main() {
-                    vColor = color; vSize = size; vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-                    gl_PointSize = size * (400.0 / -mvPosition.z); gl_Position = projectionMatrix * mvPosition;
+                    vColor = color;
+                    vSize = size;
+                    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                    gl_PointSize = size * (400.0 / -mvPosition.z);
+                    gl_Position = projectionMatrix * mvPosition;
                 }`,
             fragmentShader: `
-                uniform sampler2D pointTexture; varying vec3 vColor; varying float vSize;
+                uniform sampler2D pointTexture;
+                varying vec3 vColor;
+                varying float vSize;
                 void main() {
-                    float alpha = texture2D(pointTexture, gl_PointCoord).a; if (alpha < 0.1) discard;
+                    float alpha = texture2D(pointTexture, gl_PointCoord).a;
+                    if (alpha < 0.1) discard;
                     gl_FragColor = vec4(vColor, alpha * 0.9);
                 }`,
-            blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, vertexColors: true
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+            transparent: true,
+            vertexColors: true
         });
         scene.add(new THREE.Points(starGeometry, starMaterial));
     }
@@ -507,7 +532,8 @@
     function createStarTexture() {
         const size = 64;
         const canvas = document.createElement('canvas');
-        canvas.width = size; canvas.height = size;
+        canvas.width = size;
+        canvas.height = size;
         const context = canvas.getContext('2d');
         const gradient = context.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
         gradient.addColorStop(0, 'rgba(255,255,255,1)');
@@ -525,9 +551,14 @@
     async function setupParticleSystem() {
         // --- ADDED YOUR IMAGES BACK INTO THE SHAPES ARRAY ---
         const SHAPES = [
-            { name: 'Image 1', generator: () => generateImageFromPixels('https://files.catbox.moe/w6oo8w.jpg', CONFIG.particleCount, CONFIG.shapeSize) },
-            { name: 'Image 2', generator: () => generateImageFromPixels('https://files.catbox.moe/atlbba.webp', CONFIG.particleCount, CONFIG.shapeSize) },
-            { name: 'Image 3', generator: () => generateImageFromPixels('https://files.catbox.moe/p7ghmd.jpg', CONFIG.particleCount, CONFIG.shapeSize) }
+            {name: 'Image 1', generator: () => generateImageFromPixels('https://files.catbox.moe/gg5snj.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
+            {name: 'Image 2', generator: () => generateImageFromPixels('https://files.catbox.moe/9a8t5z.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
+            {name: 'Image 3', generator: () => generateImageFromPixels('https://files.catbox.moe/9knaxn.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
+            {name: 'Image 4', generator: () => generateImageFromPixels('https://files.catbox.moe/mf7g7w.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
+            {name: 'Image 5', generator: () => generateImageFromPixels('https://files.catbox.moe/wsi1uq.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
+            {name: 'Image 6', generator: () => generateImageFromPixels('https://files.catbox.moe/8rjxam.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
+            {name: 'Image 7', generator: () => generateImageFromPixels('https://files.catbox.moe/jii38c.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
+            {name: 'Image 8', generator: () => generateImageFromPixels('https://files.catbox.moe/cbp42x.jpg', CONFIG.particleCount, CONFIG.shapeSize)}
         ];
 
         console.log("Loading all particle shapes, including images...");
@@ -565,31 +596,47 @@
         particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
         particlesMaterial = new THREE.ShaderMaterial({
-            uniforms: { pointTexture: { value: createStarTexture() } },
+            uniforms: {
+                pointTexture: {value: createStarTexture()}
+            },
             vertexShader: `
-                attribute float size; attribute float opacity; attribute float aEffectStrength;
-                varying vec3 vColor; varying float vOpacity; varying float vEffectStrength;
+                attribute float size;
+                attribute float opacity;
+                attribute float aEffectStrength;
+                varying vec3 vColor;
+                varying float vOpacity;
+                varying float vEffectStrength;
                 void main() {
-                    vColor = color; vOpacity = opacity; vEffectStrength = aEffectStrength;
+                    vColor = color;
+                    vOpacity = opacity;
+                    vEffectStrength = aEffectStrength;
                     vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
                     float sizeScale = 1.0 - vEffectStrength * ${CONFIG.morphSizeFactor.toFixed(2)};
                     gl_PointSize = size * sizeScale * (400.0 / -mvPosition.z);
                     gl_Position = projectionMatrix * mvPosition;
                 }`,
             fragmentShader: `
-                uniform sampler2D pointTexture; varying vec3 vColor; varying float vOpacity; varying float vEffectStrength;
+                uniform sampler2D pointTexture;
+                varying vec3 vColor;
+                varying float vOpacity;
+                varying float vEffectStrength;
                 void main() {
-                    float alpha = texture2D(pointTexture, gl_PointCoord).a; if (alpha < 0.05) discard;
+                    float alpha = texture2D(pointTexture, gl_PointCoord).a;
+                    if (alpha < 0.05) discard;
                     vec3 finalColor = vColor * (1.0 + vEffectStrength * ${CONFIG.morphBrightnessFactor.toFixed(2)});
                     gl_FragColor = vec4(finalColor, alpha * vOpacity);
                 }`,
-            blending: THREE.AdditiveBlending, depthTest: true, depthWrite: false, transparent: true, vertexColors: true
+            blending: THREE.AdditiveBlending,
+            depthTest: true,
+            depthWrite: false,
+            transparent: true,
+            vertexColors: true
         });
 
         particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
         scene.add(particleSystem);
 
-        window.triggerMorph = function() {
+        window.triggerMorph = function () {
             if (isMorphing) return;
             isMorphing = true;
             controls.autoRotate = false;
@@ -610,7 +657,9 @@
                 targetVec.fromArray(nextTargetPositions, i3);
                 swarmVec.lerpVectors(sourceVec, targetVec, 0.5);
                 const offsetDir = tempVec.set(
-                    noise3D(i * 0.05, 10, 10), noise3D(20, i * 0.05, 20), noise3D(30, 30, i * 0.05)
+                    noise3D(i * 0.05, 10, 10),
+                    noise3D(20, i * 0.05, 20),
+                    noise3D(30, 30, i * 0.05)
                 ).normalize();
                 const distFactor = sourceVec.distanceTo(targetVec) * 0.1 + centerOffsetAmount;
                 swarmVec.addScaledVector(offsetDir, distFactor * (0.5 + Math.random() * 0.8));
@@ -654,6 +703,7 @@
             const i3 = i * 3;
             tempVec.fromArray(positionsArray, i3);
             const dist = tempVec.distanceTo(center);
+
             let hue;
             if (CONFIG.colorScheme === 'rainbow') {
                 const normX = (tempVec.x / maxRadius + 1) / 2;
@@ -666,6 +716,7 @@
             const noiseValue = (noise3D(tempVec.x * 0.2, tempVec.y * 0.2, tempVec.z * 0.2) + 1) * 0.5;
             const saturation = THREE.MathUtils.clamp(colorScheme.saturation * (0.9 + noiseValue * 0.2), 0, 1);
             const lightness = THREE.MathUtils.clamp(colorScheme.lightness * (0.85 + noiseValue * 0.3), 0.1, 0.9);
+
             const color = new THREE.Color().setHSL(hue / 360, saturation, lightness);
             color.toArray(colors, i3);
         }
@@ -707,20 +758,27 @@
     function animate() {
         requestAnimationFrame(animate);
         if (!isInitialized) return;
+
         const elapsedTime = clock.getElapsedTime();
         const deltaTime = clock.getDelta();
+
         controls.update();
+
         const positions = particlesGeometry.attributes.position.array;
         const effectStrengths = particlesGeometry.attributes.aEffectStrength.array;
+
         if (isMorphing) {
             updateMorphAnimation(positions, effectStrengths, elapsedTime, deltaTime);
         } else {
             updateIdleAnimation(positions, effectStrengths, elapsedTime, deltaTime);
         }
+
         particlesGeometry.attributes.position.needsUpdate = true;
+
         if (isMorphing || particlesGeometry.attributes.aEffectStrength.needsUpdate) {
             particlesGeometry.attributes.aEffectStrength.needsUpdate = true;
         }
+
         composer.render(deltaTime);
     }
 
@@ -730,17 +788,22 @@
         const effectStrength = Math.sin(t * Math.PI);
         const currentSwirl = effectStrength * CONFIG.swirlFactor * deltaTime * 50;
         const currentNoise = effectStrength * CONFIG.noiseMaxStrength;
+
         for (let i = 0; i < CONFIG.particleCount; i++) {
             const i3 = i * 3;
+
             sourceVec.fromArray(sourcePositions, i3);
             swarmVec.fromArray(swarmPositions, i3);
             targetVec.fromArray(targets, i3);
+
             const t_inv = 1.0 - t;
             const t_inv_sq = t_inv * t_inv;
             const t_sq = t * t;
+
             bezPos.copy(sourceVec).multiplyScalar(t_inv_sq);
             bezPos.addScaledVector(swarmVec, 2.0 * t_inv * t);
             bezPos.addScaledVector(targetVec, t_sq);
+
             if (currentSwirl > 0.01) {
                 tempVec.subVectors(bezPos, sourceVec);
                 swirlAxis.set(
@@ -751,6 +814,7 @@
                 tempVec.applyAxisAngle(swirlAxis, currentSwirl * (0.5 + Math.random() * 0.5));
                 bezPos.copy(sourceVec).add(tempVec);
             }
+
             if (currentNoise > 0.01) {
                 const noiseTime = elapsedTime * CONFIG.noiseTimeScale;
                 noiseOffset.set(
@@ -760,34 +824,43 @@
                 );
                 bezPos.addScaledVector(noiseOffset, currentNoise);
             }
+
             positions[i3] = bezPos.x;
             positions[i3 + 1] = bezPos.y;
             positions[i3 + 2] = bezPos.z;
+
             effectStrengths[i] = effectStrength;
         }
         particlesGeometry.attributes.aEffectStrength.needsUpdate = true;
     }
+
 
     function updateIdleAnimation(positions, effectStrengths, elapsedTime, deltaTime) {
         const breathScale = 1.0 + Math.sin(elapsedTime * 0.5) * 0.015;
         const timeScaled = elapsedTime * CONFIG.idleFlowSpeed;
         const freq = 0.1;
         let needsEffectStrengthReset = false;
+
         for (let i = 0; i < CONFIG.particleCount; i++) {
             const i3 = i * 3;
             sourceVec.fromArray(sourcePositions, i3);
+
             tempVec.copy(sourceVec).multiplyScalar(breathScale);
+
             flowVec.set(
                 noise4D(tempVec.x * freq, tempVec.y * freq, tempVec.z * freq, timeScaled),
                 noise4D(tempVec.x * freq + 10, tempVec.y * freq + 10, tempVec.z * freq + 10, timeScaled),
                 noise4D(tempVec.x * freq + 20, tempVec.y * freq + 20, tempVec.z * freq + 20, timeScaled)
             );
             tempVec.addScaledVector(flowVec, CONFIG.idleFlowStrength);
+
             currentVec.fromArray(positions, i3);
             currentVec.lerp(tempVec, 0.05);
+
             positions[i3] = currentVec.x;
             positions[i3 + 1] = currentVec.y;
             positions[i3 + 2] = currentVec.z;
+
             if (effectStrengths[i] !== 0.0) {
                 effectStrengths[i] = 0.0;
                 needsEffectStrengthReset = true;
@@ -799,7 +872,9 @@
     }
 
     function onCanvasClick(event) {
-        if (event.target.closest('.social a')) { return; }
+        if (event.target.closest('.social a')) {
+            return;
+        }
         // Call triggerMorph on canvas click to cycle through images
         window.triggerMorph();
 
