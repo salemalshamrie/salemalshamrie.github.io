@@ -225,10 +225,8 @@
     <div class="social">
         <div>
             <a href="https://t.me/kokksha"><i class="fab fa-telegram" style="color: #2AABEE;"></i></a>
-            <a href="https://www.facebook.com/share/15KQ2NmX9V/"><i class="fab fa-facebook"
-                                                                     style="color: #1877F2;"></i></a>
-            <a href="https://www.instagram.com/_u_vf?igsh=bXRqd2Z4ZWhteW94"><i class="fab fa-instagram"
-                                                                              style="color: #E1306C;"></i></a>
+            <a href="https://www.facebook.com/share/15KQ2NmX9V/"><i class="fab fa-facebook" style="color: #1877F2;"></i></a>
+            <a href="https://www.instagram.com/_u_vf?igsh=bXRqd2Z4ZWhteW94"><i class="fab fa-instagram" style="color: #E1306C;"></i></a>
             <a href="https://github.com/salemalshamrie"><i class="fab fa-github" style="color: #171515;"></i></a>
             <a href="tg://settings"><i class="fas fa-user" style="color: #888888;"></i></a>
             <a href="https://g.co/kgs/pXVXQxK"><i class="fas fa-futbol" style="color: #DB4437;"></i></a>
@@ -273,11 +271,11 @@
     let isMorphing = false;
     let initialScaleDone = false;
 
-    let currentShapeIndex = 0;
+    let currentShapeIndex = 0; // Still needed for array access, even if only one "shape"
 
     const CONFIG = {
         particleCount: 30000,
-        shapeSize: 35,
+        shapeSize: 35, // Still relevant for initial spread
         swarmDistanceFactor: 1.5,
         swirlFactor: 4.0,
         noiseFrequency: 0.1,
@@ -287,9 +285,9 @@
         morphDuration: 4000,
         particleSizeRange: [0.05, 0.15],
         starCount: 18000,
-        bloomStrength: 1.5, // Increased for more clarity
-        bloomRadius: 0.8,   // Adjusted for clarity
-        bloomThreshold: 0.05, // Decreased for more clarity
+        bloomStrength: 1.5,
+        bloomRadius: 0.8,
+        bloomThreshold: 0.05,
         idleFlowStrength: 0.25,
         idleFlowSpeed: 0.08,
         idleRotationSpeed: 0.02,
@@ -321,88 +319,20 @@
     const swirlAxis = new THREE.Vector3();
     const currentVec = new THREE.Vector3();
 
-    // --- GENERATOR FUNCTIONS (Only keeping image generator) ---
-
+    // --- ONLY GENERATOR FUNCTION FOR RANDOM SCATTER ---
     /**
-     * IMPROVED generateImageFromPixels FUNCTION
+     * Generates points for a random scattered cloud.
      */
-    function generateImageFromPixels(imageUrl, count, size) {
-        return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.crossOrigin = 'Anonymous';
-            img.src = imageUrl;
-
-            img.onload = () => {
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d', {willReadFrequently: true});
-
-                const canvasWidth = 200;
-                const aspectRatio = img.width / img.height;
-                const canvasHeight = canvasWidth / aspectRatio;
-                canvas.width = canvasWidth;
-                canvas.height = canvasHeight;
-
-                context.drawImage(img, 0, 0, canvasWidth, canvasHeight);
-
-                const imageData = context.getImageData(0, 0, canvasWidth, canvasHeight).data;
-                const potentialPoints = [];
-
-                for (let y = 0; y < canvasHeight; y++) {
-                    for (let x = 0; x < canvasWidth; x++) {
-                        const i = (y * canvasWidth + x) * 4;
-                        const r = imageData[i];
-                        const g = imageData[i + 1];
-                        const b = imageData[i + 2];
-                        const a = imageData[i + 3];
-
-                        const brightness = (r + g + b) / 3;
-                        if (a > 200 && brightness > 60) {
-                            potentialPoints.push({x: x, y: y, brightness: brightness});
-                        }
-                    }
-                }
-
-                if (potentialPoints.length === 0) {
-                    console.warn(`No valid pixels found in image: ${imageUrl}. Falling back to an empty point set.`);
-                    // Return an empty array or a simple fallback if no pixels are found
-                    resolve(new Float32Array(count * 3));
-                    return;
-                }
-
-                const points = new Float32Array(count * 3);
-                const scaleX = size / canvasWidth;
-                const scaleY = size / canvasHeight;
-
-                const totalBrightness = potentialPoints.reduce((sum, p) => sum + p.brightness, 0);
-                const brightnessBuckets = [];
-                let cumulativeBrightness = 0;
-                for (let i = 0; i < potentialPoints.length; i++) {
-                    cumulativeBrightness += potentialPoints[i].brightness;
-                    brightnessBuckets.push(cumulativeBrightness);
-                }
-
-
-                for (let i = 0; i < count; i++) {
-                    const randValue = Math.random() * totalBrightness;
-                    let selectedIndex = brightnessBuckets.findIndex(val => val >= randValue);
-                    if (selectedIndex === -1) selectedIndex = potentialPoints.length - 1;
-
-                    const coord = potentialPoints[selectedIndex];
-
-                    const xPos = (coord.x + (Math.random() - 0.5) * 0.8 - canvasWidth / 2) * scaleX;
-                    const yPos = -(coord.y + (Math.random() - 0.5) * 0.8 - canvasHeight / 2) * scaleY;
-                    const zPos = (Math.random() - 0.5) * (size * 0.05) * (coord.brightness / 255);
-
-                    points.set([xPos, yPos, zPos], i * 3);
-                }
-                resolve(points);
-            };
-
-            img.onerror = () => {
-                console.error(`Failed to load image: ${imageUrl}. Falling back to an empty point set.`);
-                resolve(new Float32Array(count * 3));
-            };
-        });
+    function generateRandomPoints(count, size) {
+        const points = new Float32Array(count * 3);
+        for (let i = 0; i < count; i++) {
+            points.set([
+                (Math.random() - 0.5) * size * 1.5,
+                (Math.random() - 0.5) * size * 1.5,
+                (Math.random() - 0.5) * size * 1.5
+            ], i * 3);
+        }
+        return points;
     }
 
 
@@ -462,10 +392,7 @@
     function setupPostProcessing() {
         composer = new EffectComposer(renderer);
         composer.addPass(new RenderPass(scene, camera));
-        bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight),
-            CONFIG.bloomStrength,
-            CONFIG.bloomRadius,
-            CONFIG.bloomThreshold);
+        bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), CONFIG.bloomStrength, CONFIG.bloomRadius, CONFIG.bloomThreshold);
         composer.addPass(bloomPass);
     }
 
@@ -511,7 +438,8 @@
                     vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
                     gl_PointSize = size * (400.0 / -mvPosition.z);
                     gl_Position = projectionMatrix * mvPosition;
-                }`,
+                }
+            `,
             fragmentShader: `
                 uniform sampler2D pointTexture;
                 varying vec3 vColor;
@@ -520,7 +448,8 @@
                     float alpha = texture2D(pointTexture, gl_PointCoord).a;
                     if (alpha < 0.1) discard;
                     gl_FragColor = vec4(vColor, alpha * 0.9);
-                }`,
+                }
+            `,
             blending: THREE.AdditiveBlending,
             depthWrite: false,
             transparent: true,
@@ -547,34 +476,29 @@
 
     /**
      * MODIFIED PARTICLE SYSTEM SETUP (now async)
+     * Replaced all specific shape generators with only a random scatter.
      */
     async function setupParticleSystem() {
-        // --- ADDED YOUR IMAGES BACK INTO THE SHAPES ARRAY ---
+        // Only one "shape" which is a random scatter
         const SHAPES = [
-            {name: 'Image 1', generator: () => generateImageFromPixels('https://files.catbox.moe/gg5snj.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
-            {name: 'Image 2', generator: () => generateImageFromPixels('https://files.catbox.moe/9a8t5z.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
-            {name: 'Image 3', generator: () => generateImageFromPixels('https://files.catbox.moe/9knaxn.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
-            {name: 'Image 4', generator: () => generateImageFromPixels('https://files.catbox.moe/mf7g7w.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
-            {name: 'Image 5', generator: () => generateImageFromPixels('https://files.catbox.moe/wsi1uq.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
-            {name: 'Image 6', generator: () => generateImageFromPixels('https://files.catbox.moe/8rjxam.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
-            {name: 'Image 7', generator: () => generateImageFromPixels('https://files.catbox.moe/jii38c.jpg', CONFIG.particleCount, CONFIG.shapeSize)},
-            {name: 'Image 8', generator: () => generateImageFromPixels('https://files.catbox.moe/cbp42x.jpg', CONFIG.particleCount, CONFIG.shapeSize)}
+            {name: 'Random Scatter', generator: () => generateRandomPoints(CONFIG.particleCount, CONFIG.shapeSize)}
         ];
 
-        console.log("Loading all particle shapes, including images...");
+        console.log("Loading initial particle scatter...");
         const infoDiv = document.getElementById('info');
         infoDiv.innerText = `Loading Assets...`;
 
-        const shapePromises = SHAPES.map(shape => shape.generator());
+        // Load only the initial random scatter
+        targetPositions = [await SHAPES[0].generator()];
 
-        targetPositions = await Promise.all(shapePromises);
-
-        console.log("All shapes loaded successfully.");
+        console.log("Initial scatter loaded successfully.");
         infoDiv.innerText = `Shape: ${SHAPES[currentShapeIndex].name}`;
 
         particlesGeometry = new THREE.BufferGeometry();
         currentPositions = new Float32Array(targetPositions[0]);
         sourcePositions = new Float32Array(targetPositions[0]);
+        // swarmPositions is no longer strictly needed for morphing between shapes,
+        // but keeping it won't harm. It's filled below based on source/target for consistency.
         swarmPositions = new Float32Array(CONFIG.particleCount * 3);
 
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(currentPositions, 3));
@@ -614,7 +538,8 @@
                     float sizeScale = 1.0 - vEffectStrength * ${CONFIG.morphSizeFactor.toFixed(2)};
                     gl_PointSize = size * sizeScale * (400.0 / -mvPosition.z);
                     gl_Position = projectionMatrix * mvPosition;
-                }`,
+                }
+            `,
             fragmentShader: `
                 uniform sampler2D pointTexture;
                 varying vec3 vColor;
@@ -625,7 +550,8 @@
                     if (alpha < 0.05) discard;
                     vec3 finalColor = vColor * (1.0 + vEffectStrength * ${CONFIG.morphBrightnessFactor.toFixed(2)});
                     gl_FragColor = vec4(finalColor, alpha * vOpacity);
-                }`,
+                }
+            `,
             blending: THREE.AdditiveBlending,
             depthTest: true,
             depthWrite: false,
@@ -636,19 +562,22 @@
         particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
         scene.add(particleSystem);
 
+        // Modified triggerMorph to just re-randomize if called, as there's only one "shape"
         window.triggerMorph = function () {
             if (isMorphing) return;
             isMorphing = true;
             controls.autoRotate = false;
 
-            console.log("Morphing triggered...");
-            infoDiv.innerText = `Morphing...`;
+            console.log("Re-scattering particles...");
+            infoDiv.innerText = `Re-scattering...`;
             infoDiv.style.textShadow = '0 0 8px rgba(255, 150, 50, 0.9)';
 
             sourcePositions.set(currentPositions);
+            // Generate new random positions as the "target"
+            const newRandomTarget = generateRandomPoints(CONFIG.particleCount, CONFIG.shapeSize);
+            targetPositions[0] = newRandomTarget; // Update the single target shape
 
-            const nextShapeIndex = (currentShapeIndex + 1) % SHAPES.length;
-            const nextTargetPositions = targetPositions[nextShapeIndex];
+            const nextTargetPositions = targetPositions[0]; // Always the first/only one
 
             const centerOffsetAmount = CONFIG.shapeSize * CONFIG.swarmDistanceFactor;
             for (let i = 0; i < CONFIG.particleCount; i++) {
@@ -668,7 +597,7 @@
                 swarmPositions[i3 + 2] = swarmVec.z;
             }
 
-            currentShapeIndex = nextShapeIndex;
+            // currentShapeIndex is always 0 now
             morphState.progress = 0;
             if (morphTimeline) morphTimeline.pause();
 
@@ -678,14 +607,14 @@
                 duration: CONFIG.morphDuration,
                 easing: 'cubicBezier(0.4, 0.0, 0.2, 1.0)',
                 complete: () => {
-                    console.log("Morphing complete.");
-                    infoDiv.innerText = `Shape: ${SHAPES[currentShapeIndex].name}`;
+                    console.log("Re-scatter complete.");
+                    infoDiv.innerText = `Shape: Random Scatter`;
                     infoDiv.style.textShadow = '0 0 5px rgba(0, 128, 255, 0.8)';
-                    currentPositions.set(targetPositions[currentShapeIndex]);
+                    currentPositions.set(targetPositions[0]); // Set to the new random target
                     particlesGeometry.attributes.position.needsUpdate = true;
                     particleEffectStrengths.fill(0.0);
                     particlesGeometry.attributes.aEffectStrength.needsUpdate = true;
-                    sourcePositions.set(targetPositions[currentShapeIndex]);
+                    sourcePositions.set(targetPositions[0]); // Source is now the new random target
                     updateColors();
                     isMorphing = false;
                     controls.autoRotate = true;
@@ -694,11 +623,10 @@
         }
     }
 
-
     function updateColorArray(colors, positionsArray) {
         const colorScheme = COLOR_SCHEMES[CONFIG.colorScheme];
         const center = new THREE.Vector3(0, 0, 0);
-        const maxRadius = CONFIG.shapeSize * 1.1;
+        const maxRadius = CONFIG.shapeSize * 1.5; // Adjusted for the scatter
         for (let i = 0; i < CONFIG.particleCount; i++) {
             const i3 = i * 3;
             tempVec.fromArray(positionsArray, i3);
@@ -739,12 +667,11 @@
             duration: CONFIG.morphDuration,
             easing: 'cubicBezier(0.4, 0.0, 0.2, 1.0)',
             update: () => {
-                // Not scaling the shape itself, but rather allowing it to settle from an initial state
-                // This part usually adjusts if the shape starts from a "smaller" or "dispersed" state
+                // No actual shape scaling, just settling
             },
             complete: () => {
                 document.getElementById('info').style.textShadow = '0 0 5px rgba(0, 128, 255, 0.8)';
-                sourcePositions.set(targetPositions[currentShapeIndex]);
+                sourcePositions.set(targetPositions[0]); // Set to the initial random target
                 updateColors();
                 particleEffectStrengths.fill(0.0);
                 particlesGeometry.attributes.aEffectStrength.needsUpdate = true;
@@ -770,6 +697,7 @@
         if (isMorphing) {
             updateMorphAnimation(positions, effectStrengths, elapsedTime, deltaTime);
         } else {
+            // Idle animation will now work on the scattered particles
             updateIdleAnimation(positions, effectStrengths, elapsedTime, deltaTime);
         }
 
@@ -784,7 +712,7 @@
 
     function updateMorphAnimation(positions, effectStrengths, elapsedTime, deltaTime) {
         const t = morphState.progress;
-        const targets = targetPositions[currentShapeIndex];
+        const targets = targetPositions[0]; // Always the single random scatter
         const effectStrength = Math.sin(t * Math.PI);
         const currentSwirl = effectStrength * CONFIG.swirlFactor * deltaTime * 50;
         const currentNoise = effectStrength * CONFIG.noiseMaxStrength;
@@ -834,7 +762,6 @@
         particlesGeometry.attributes.aEffectStrength.needsUpdate = true;
     }
 
-
     function updateIdleAnimation(positions, effectStrengths, elapsedTime, deltaTime) {
         const breathScale = 1.0 + Math.sin(elapsedTime * 0.5) * 0.015;
         const timeScaled = elapsedTime * CONFIG.idleFlowSpeed;
@@ -855,7 +782,7 @@
             tempVec.addScaledVector(flowVec, CONFIG.idleFlowStrength);
 
             currentVec.fromArray(positions, i3);
-            currentVec.lerp(tempVec, 0.05);
+            currentVec.lerp(tempVec, 0.05); // Smoothly interpolate to the new position
 
             positions[i3] = currentVec.x;
             positions[i3 + 1] = currentVec.y;
@@ -875,7 +802,7 @@
         if (event.target.closest('.social a')) {
             return;
         }
-        // Call triggerMorph on canvas click to cycle through images
+        // Call triggerMorph on canvas click to re-scatter particles
         window.triggerMorph();
 
         // Color scheme change is kept, but it's independent of shape morphing
